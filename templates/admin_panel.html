@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/panel.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<body>
+
+    <header class="fixed-header">
+        <img src="{{ url_for('static', filename='images/cisco.png') }}" alt="Logo 2" class="logo1">
+
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo 1" class="logo">
+    </header>
+
+
+    <h1>Panneau d'Administration - Gérer VLANs et Switches</h1>
+    <a href="{{ url_for('admin') }}"><button class="retour">Retour</button></a>
+
+    <div class="container-tab">
+        <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'VLAN')">Configurer VLAN</button>
+            <button class="tablinks" onclick="openTab(event, 'Switch')">Configurer Switch</button>
+            <button class="tablinks" onclick="openTab(event, 'Port')">Verouillage des ports</button>
+
+        </div>
+<!--ajout de vlan-->
+        <div id="VLAN" class="tabcontent">
+        <div class="conf">
+            <h1>Ajouter un VLAN</h1>
+            <br>
+            <form action="/add_vlan" method="POST">
+        <label for="vlan_name">VLAN Name:</label>
+        <input type="text" id="vlan_name" name="vlan_name" required><br><br>
+        <label for="ports">Port :</label>
+        <input type="text" id="ports" name="ports" required><br><br>
+        <label for="Access">Access :</label>
+
+        <input type="radio" id="Access" name="type" value="Access" required>
+        <label for="Trunk">Trunk :</label>
+
+        <input type="radio" id="Trunk" name="type" value="Trunk"><br><br>
+
+
+        <button type="submit">Add VLAN</button>
+    </form>
+</div>
+<br> <br> <br>
+    <table border="1" class="modern-table">
+        <tr>
+            <th>Name</th>
+            <th>Port</th>
+            <th>Action</th>
+        </tr>
+        {% for vlan in vlans %}
+        <tr>
+            <td>{{ vlan[0] }}</td> 
+            <td>{{ vlan[1] }}</td> 
+            <td>{{ vlan[2] }}</td> 
+
+            <td>
+                <form action="{{ url_for('delete_vlan') }}" method="POST">
+                    <input type="hidden" name="vlan_id" value="{{ vlan[0] }}"> 
+                    <button type="submit" class="delete-button">Supprimer</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+        </div>
+    <!--ajout de switch-->
+        <div id="Switch" class="tabcontent">
+            <div class="conf">
+            <h2>Ajouter un Switch</h2>
+        <form action="{{ url_for('add_switch') }}" method="POST">
+            <label for="switch_name">Nom du Switch:</label>
+            <input type="text" id="switch_name" name="switch_name" required><br><br>
+          
+            <button type="submit">Ajouter Switch</button>
+        </form>
+    </div>
+        <br> <br> <br>
+
+        <h3>Liste des Switchs</h3>
+        <table border="1" class="modern-table">
+            <tr>
+                <th>Nom</th>
+                <th>Num</th>
+                <th>Action</th>
+            </tr>
+            {% for switch in switches %}
+            <tr>
+                <td>{{ switch[0] }}</td>
+                <td>{{ switch[1] }}</td>
+                <td>
+                    <form action="{{ url_for('delete_switch') }}" method="POST">
+                        <input type="hidden" name="switch_id" value="{{ switch[1] }}">
+                        <button type="submit" class="delete-button">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        </div>
+
+        <div id="Port" class="tabcontent">
+            <div class="conf">
+                <h2>Verouiller un port</h2>
+    </div>
+    
+<!--verouillage des switchs-->  
+
+    <br> <br> <br>
+    <table border="1" class="modern-table">
+        <thead>
+            <tr>
+                <th>
+                    Name 
+                    <select id="nameFilter" style="width: 48%;">
+                        <option value="">All Switches</option>
+
+                        {% for switch in switches %}
+
+                        <option value="{{ switch[1] }}">{{ switch[0] }}</option>
+    
+                        {% endfor %}
+                        
+                    </select>
+
+                </th>
+                <th>Port</th>
+                <th>Locked</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for port in ports %}
+            <tr class="table-row">
+                <td>{{ port[0] }}</td> 
+                <td>{{ port[1] }}</td> 
+                <td>{{ port[2] }}</td>
+                <td>
+                    <button class="{{ 'locked' if port[2] == 'yes' else 'unlocked' }}" onclick="toggleLock('{{ port[0] }}', '{{ port[1] }}', this)">
+                        <i class="fa {{ 'fa-lock' if port[2] == 'yes' else 'fa-unlock' }}"></i>
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+            </div>
+
+
+    </div>
+
+
+
+<script>
+function toggleLock(switchName, portNumber, element) {
+    fetch(`/toggle-lock/${switchName}/${portNumber}`, {
+        method: 'POST',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const icon = element.querySelector('i');
+            const isLocked = icon.classList.contains('fa-lock');
+            icon.classList.remove('fa-lock', 'fa-unlock');
+            icon.classList.add(isLocked ? 'fa-unlock' : 'fa-lock');
+            window.location.reload();
+
+        } else {
+            alert('Failed to update port status.');
+        }
+    })
+    .catch(error => alert('Error updating port status: ' + error));
+}
+
+
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+    const filterSelect = document.getElementById('nameFilter');
+    filterSelect.selectedIndex = 0; 
+    filterSelect.addEventListener('change', function() {
+        const selectedValue = this.value.toLowerCase();
+        const tableRows = document.querySelectorAll('.table-row');
+
+        tableRows.forEach(row => {
+            const nameCellText = row.cells[0].textContent.toLowerCase();
+            if (selectedValue === "" || nameCellText.includes(selectedValue)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+});
+
+
+
+    </script>
+</body>
+</html>

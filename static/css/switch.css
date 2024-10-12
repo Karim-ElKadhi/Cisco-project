@@ -1,0 +1,167 @@
+.fixed-header {
+    width: 100%;
+    position: fixed; /* Fixe l'en-tête en haut de la page */
+    top: 0;
+    left: 0;
+    background-color: /*#EEEEEE */rgb(173, 173, 173); /* Mettez la couleur de fond souhaitée */
+    z-index: 1000; /* S'assure que l'en-tête reste au-dessus des autres éléments */
+    display: flex; /* Utilise flexbox pour aligner les logos */
+    justify-content: space-between; /* Espacer les logos */
+    padding: 10px 20px; /* Ajustez selon vos besoins pour le padding */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optionnel: ajoute une ombre pour mieux distinguer l'en-tête */
+}
+.body-content .right-align{
+display: flex;
+justify-content: flex-end;
+align-items: flex-end;}
+
+.body-content .right-align  .btn{
+    width: 55px;
+    height: 55px;
+    margin-top: 0px;
+    margin-right: 50px;
+    background-image: url('/static/images/adn-.png');
+    background-size: cover;  
+    background-position: center;
+    padding: 8px 16px;
+    border: none;
+    background-color: #23242a;
+    border-radius: 4px;
+    cursor: pointer;
+
+}
+
+.body-content .txt{
+    color : #fff;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 30px;
+    margin-top: 5px;
+  
+}
+
+.body-content {
+    padding-top: 70px; }
+
+.logo {
+    margin-right: 100px;
+
+    height: 50px; /* Ajustez la taille des logos selon vos besoins */
+}
+.logo1 {
+    margin-left: 50px;
+    height: 50px; /* Ajustez la taille des logos selon vos besoins */
+}
+
+
+
+body {
+    font-family: Helvetica, sans-serif;
+    text-align: center;
+    padding: 20px;
+    background: #23242a;  /* #686D76*/
+
+}
+
+h1 {
+    color:#12a9ff;
+}
+
+.switch-selection {
+    margin-top: 20px;
+}
+
+.switch-button {
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.center-image {
+    display: block;
+    margin: 5px auto; /* Centre l'image horizontalement */
+    width: 40%; /* Ajustez ceci pour agrandir l'image */
+    max-width: 100%; /* Assure que l'image ne dépasse pas la largeur de la fenêtre */
+    height: auto; /* Maintient le ratio d'aspect de l'image */
+}
+
+
+
+    .dropdown   {
+        min-width: 15em;
+        position: relative;
+        margin: 2em;
+    }
+    
+    .dropdown *{
+        box-sizing: border-box;
+    }
+    .select {
+    background: #2a2f3b;    
+    color:#fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px #2a2f3b solid;
+    border-radius: 0.5em;
+    padding: 1em;
+    cursor: pointer;
+    transition: background 0.3s;
+    }
+    
+    .select-clicked {
+      border : 2px #26489a solid;
+      box-shadow : 0 0 0.8em #26489a;
+    }
+    .select:hover{
+        background: #323741;
+    }
+    
+    .caret{
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #fff;
+    transition: 0.3s;   
+    }
+    .caret-rotate {
+        transform: rotate(180deg);
+    }
+    .menu {
+        list-style: none;
+        padding: 0.2em 0.5em;
+        background: #323741;
+        border: 1px #363a43 solid;
+        box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.2);
+        border-radius: 0.5em;
+        color: #9fa5b5;
+        position: absolute;
+        top: 3em;
+        left: 50%;
+        width: 100%;
+        transform:translateX(-50%) ;
+        opacity: 0;
+        display: none;
+        transition: 0.2s;
+        z-index: 1;
+    
+    }
+    
+    .menu li {
+    padding: 0.7em 0.5em;
+    margin : 0.3em 0;
+      border-radius:0.5em;
+      cursor:pointer;
+    }
+    .menu li:hover{
+    background: #2a2d35;    
+    }
+    .active{
+      background : #23242a;
+    }
+    .menu-open {
+      display:block;
+      opacity:1;
+    }

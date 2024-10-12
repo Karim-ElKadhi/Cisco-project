@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interface Configuration</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cisco.css') }}">
+
+<script>
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const switchName = urlParams.get('switch');
+    const port = urlParams.get('port');
+    if (switchName) {
+        document.getElementById('switch_number').value = switchName;  //load the name of the switch
+        document.getElementById('port_number').value=port;
+    }
+});
+
+//gerer les actions
+    function handleActionChange() {
+        var actionSelect = document.getElementById('action');
+        var action = actionSelect.value;
+        var currentVlanInput = document.getElementById('current_vlanDiv');
+        var newVlanSelect = document.getElementById('vlanSelectDiv');
+        var isChangeVlan = action === "change_vlan";
+
+        // Toggle visibility based on selected action
+        currentVlanInput.style.display = isChangeVlan ? 'block' : 'none';
+        newVlanSelect.style.display = isChangeVlan ? 'block' : 'none';
+    }
+
+    function addVLAN() {
+            var newVLAN = document.getElementById('new_vlan').value;
+            var select = document.getElementById('vlanSelect');
+            var option = document.createElement('option');
+            option.text = newVLAN;
+            option.value = newVLAN; 
+            select.add(option, select[0]);
+            document.getElementById('new_vlan').value = ''; 
+        }
+    
+          
+
+
+    // f5
+    window.onload = handleActionChange;
+
+    function submitForm() {
+            var newVlanSelect = document.getElementById('vlanSelect');
+            var newVlanText = newVlanSelect.options[newVlanSelect.selectedIndex].text;
+            document.getElementById('new_vlan_text').value = newVlanText;}
+
+
+</script>
+
+</head>
+<body>
+    <header class="fixed-header">
+        <img src="{{ url_for('static', filename='images/cisco.png') }}" alt="Logo 2" class="logo1">
+
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo 1" class="logo">
+    </header>
+   
+  <!-- <button onclick="window.location.href='/admin'"  class="right-align"></button>
+    <div class="left">Admin Panel</div> -->
+
+   <div class="titre"> <h1 >Interface Configuration</h1></div>
+
+
+
+    <form method="POST" onsubmit="submitForm()">
+        <label id="s" for="switch_number">Switch Number:</label>
+        <input type="text" id="switch_number" name="switch_number" value="{{ request.form.switch_number }}" required readonly>
+
+        <label id="p" for="port_number">Port Number:</label>
+        <input type="text" id="port_number" name="port_number" value="{{ request.form.port_number }}" required readonly><br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <label id="sa" for="action">Select Action:</label>
+        <br>
+        <br>
+
+        <select id="action" name="action" onchange="handleActionChange()">
+            <option value="show_config" {% if action == 'show_config' %}selected{% endif %}>Show Configuration</option>
+            <option value="change_vlan" {% if action == 'change_vlan' %}selected{% endif %}>Change VLAN</option>
+        </select><br>
+        
+        <br>
+        <br>
+
+
+        <div id="current_vlanDiv" style="display:none;">
+            <label id="cv" for="current_vlan">Current VLAN:</label>
+            <input type="text" id="current_vlan" name="current_vlan" value="{{ current_vlan }}" readonly>
+        </div>
+       
+        <br>
+        <br>
+
+      
+        <div id="vlanSelectDiv" style="display:none;">
+
+
+        <label  id="vs" for="vlanSelect" >New VLAN :  </label>
+         <select id="vlanSelect" name="vlanNumber">
+            {% for vlan in vlans %}
+                <option value="{{ vlan[1] }}">{{ vlan[0] }}</option>
+            {% endfor %}
+        </select>
+        <input type="hidden" id="new_vlan_text" name="new_vlan_text">
+
+        
+
+<br>
+<br>
+        <br>
+        <br>
+
+        </div>
+       <div id="btsb"> <button type="submit" class="btsubmit">Submit</button></div>
+    </form>
+
+<div class="retour"><a href="{{ url_for('show_switchs') }}"><button class="btretour">Retour</button></a></div>
+
+    
+    <h2>Config:</h2>
+    <pre>{{ file_content }}</pre>
+</body>
+</html>
+
+
+
+
+

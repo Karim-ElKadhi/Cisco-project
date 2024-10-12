@@ -1,0 +1,171 @@
+/* styles.css */
+.fixed-header {
+    width: 100%;
+    position: fixed; /* Fixe l'en-tête en haut de la page */
+    top: 0;
+    left: 0;
+    background-color: rgb(173, 173, 173); /* Mettez la couleur de fond souhaitée */
+    z-index: 1000; /* S'assure que l'en-tête reste au-dessus des autres éléments */
+    display: flex; /* Utilise flexbox pour aligner les logos */
+    justify-content: space-between; /* Espacer les logos */
+    padding: 10px 20px; /* Ajustez selon vos besoins pour le padding */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optionnel: ajoute une ombre pour mieux distinguer l'en-tête */
+}
+.fa {
+    font-size: 24px; /* Adjusts the size of the icons */
+    color: #000000; /* Sets the color of the icons */
+    transition: color 0.3s ease;}
+    #vlan_name {
+        border-radius: 5px;
+      }
+      #ports {
+        border-radius: 5px;
+      }
+
+button:focus {
+    outline: none; 
+}
+label {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  button {
+    font-size: 15px;
+  }
+.fa:hover {
+    transform: scale(1.1); 
+    cursor: pointer; 
+}
+.body-content {
+    padding-top: 70px; }
+
+.logo {
+    margin-right: 100px;
+
+    height: 50px; /* Ajustez la taille des logos selon vos besoins */
+}
+.logo1 {
+    margin-left: 50px;
+    height: 50px; /* Ajustez la taille des logos selon vos besoins */
+}
+body {
+    font-family: Arial, sans-serif;
+   
+    color: whitesmoke;
+
+    background-color: #23242a;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+.section {
+    flex: 1;  /* Cela permet à chaque section de prendre la moitié de l'espace horizontal disponible */
+    min-width: 300px;  /* Cela assure que chaque section ne descendra pas en dessous de 300px */
+    padding: 20px;
+    border-right: 2px solid #ccc;  /* Ajoute une bordure entre les deux colonnes */
+}
+.section:last-child {
+    border-right: none;
+}
+
+
+.container-tab {
+    width: 100%; /* Adjust as needed */
+    margin: auto; /* Center the container */
+}
+
+.conf{
+    display: table;
+margin: auto;
+text-align: center;
+}
+   
+.tab {
+    display: flex;
+    justify-content: center; /* Center the buttons horizontally */
+    margin-bottom: 0px;  
+    overflow: hidden;
+    border: none;
+    background-color: #23242a;
+    margin-right: 80px;
+    margin-top: 40px;
+}
+.retour{
+    background-color:  #f1f1f1;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+    background-color:  #f1f1f1;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 100px 420px;
+    border: none;
+    border-top: none;
+}
+
+
+.modern-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.modern-table th,
+.modern-table td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #ccc; /* Light gray border for a subtle look */
+}
+
+.modern-table th {
+    background-color: #f8f9fa; /* Light background on the header */
+    color: #333; /* Dark grey text for better readability */
+}
+
+.modern-table tbody tr:hover {
+    background-color: #484b57; /* Light grey background on hover */
+}
+
+.delete-button {
+    color: white;
+    background-color: #dc3545; /* Bootstrap 'danger' color for delete buttons */
+    border: none;
+    border-radius: 5px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+    background-color: #520e15; /* A darker shade of red on hover */
+}

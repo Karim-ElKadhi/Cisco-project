@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sélection du Switch</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/switch.css') }}">
+
+</head>
+<body>
+
+    <header class="fixed-header">
+        <img src="{{ url_for('static', filename='images/cisco.png') }}" alt="Logo 2" class="logo1">
+
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo 1" class="logo">
+    </header>
+<div class="body-content">
+
+
+    <div class="right-align">
+    <button onclick="window.location.href='/admin'"  class="btn"></button>
+
+    </div>
+    <div class="txt">Admin Panel</div>
+
+    <h1>Choisissez un Switch</h1>
+
+
+       <div class="dropdown">
+            <div class="select">
+            <span class="selected">Switch</span>
+            <div class="caret"></div>
+            </div>
+             
+            <ul class="menu">
+                <li class="active">Switch </li>  
+
+            {% for switch in switchs %}
+  
+            <li>{{ switch[0] }}</li>     
+            {% endfor %}
+
+            </ul>
+            
+            </div>
+        
+
+
+
+        <div>        
+            <img src="{{ url_for('static', filename='images/switch.png') }}"  alt="Image des Switches" class="center-image">
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+    <script >
+
+document.querySelectorAll('.switch-button').forEach(button => {
+    button.addEventListener('click', function() {
+        const switchNumber = this.getAttribute('data-switch');
+        
+        window.location.href = `test.html?switch=${switchNumber}`;
+    });
+});
+
+
+const dropdowns = document.querySelectorAll('.dropdown');
+dropdowns.forEach(dropdown => {
+    const select = dropdown.querySelector('.select');
+    const caret = dropdown.querySelector('.caret');
+    const menu = dropdown.querySelector('.menu');
+    const options = dropdown.querySelectorAll('.menu li');
+    const selected = dropdown.querySelector('.selected');
+
+    select.addEventListener('click', () => {
+        select.classList.toggle('select-clicked');
+        caret.classList.toggle('caret-rotate');
+        menu.classList.toggle('menu-open');
+    });
+
+    options.forEach(option => {
+        option.addEventListener('click', () => {
+            selected.innerText = option.innerText;
+            select.classList.remove('select-clicked');
+            caret.classList.remove('caret-rotate');
+            menu.classList.remove('menu-open'); // Assurez-vous que la liste se ferme après la sélection
+            options.forEach(o => o.classList.remove('active'));
+            option.classList.add('active');
+
+            window.location.href = `/ports?switch=${encodeURIComponent(option.innerText)}`;
+
+        });
+    });
+});
+
+
+    </script>
+</body>
+</html>
