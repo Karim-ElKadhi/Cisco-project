@@ -15,8 +15,8 @@ def get_db_connection():
     connection = psycopg2.connect(
         host='localhost',
         database='cisco_test',
-        user='karim',
-        password='123456'
+        user='username',
+        password='password'
     )
     return connection
 #insertion des ports
