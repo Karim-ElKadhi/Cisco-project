@@ -62,9 +62,11 @@ Lock/Unlock ports to prevent unauthorized access.
 
 ## 📸 Screenshots
 Interface examples from the project:
-
+Switch Selection
 ![Switch Selection](./Screenshot%202025-09-25%20at%2016-00-39%20Sélection%20du%20Switch.png)  
+Port Management
 ![Port Management](./Screenshot%202025-09-25%20at%2015-55-32%20Port%20Layout.png)  
+Vlan Configuration
 ![Vlan Selection](./Screenshot%20from%202025-09-25%2016-06-14.png) 
 
 
