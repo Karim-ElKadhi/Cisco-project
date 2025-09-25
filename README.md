@@ -49,7 +49,7 @@ python AppCisco.py
 Access the interface in your browser:
 http://localhost:5000
 
-🔐 Admin Features
+## 🔐 Admin Features
 Add new switches to manage.
 
 Define and configure Access and Trunk ports.
@@ -60,13 +60,13 @@ Define allowed VLANs on trunk ports.
 
 Lock/Unlock ports to prevent unauthorized access.
 
-📸 Screenshots
+## 📸 Screenshots
 Interface examples from the project:
 
+![Switch Selection](./Screenshot%202025-09-25%20at%2016-00-39%20Sélection%20du%20Switch.png)  
 ![Port Management](./Screenshot%202025-09-25%20at%2015-55-32%20Port%20Layout.png)  
-![VLAN Selection](./Screenshot%202025-09-25%20at%2016-00-39%20Sélec.png)  
-![Admin Dashboard](./Screenshot%20from%202025-09-25%2016-06-14.png) 
+![Vlan Selection](./Screenshot%20from%202025-09-25%2016-06-14.png) 
 
 
-📜 License
+## 📜 License
 This project is licensed under the MIT License.
