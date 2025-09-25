@@ -63,7 +63,7 @@ Lock/Unlock ports to prevent unauthorized access.
 📸 Screenshots
 Interface examples from the project:
 
-![Port Management](./Screenshot 2025-09-25 at 15-55-32 Port Layout.png)  
+![Port Management](./Screenshot%202025-09-25%20at%2015-55-32%20Port%20Layout.png)  
 ![VLAN Selection](./Screenshot%202025-09-25%20at%2016-00-39%20Sélec.png)  
 ![Admin Dashboard](./Screenshot%20from%202025-09-25%2016-06-14.png) 
 
